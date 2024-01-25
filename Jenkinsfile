@@ -2,10 +2,12 @@ pipeline{
     agent {
         label "jenkins-agent"
     }
+
     tools {
         jdk 'Java17'
         maven 'Maven3'
     }
+
     stages {
         stage("Cleanup Workspace") {
             steps {
@@ -16,7 +18,7 @@ pipeline{
 
         stage("Build Application") {
             steps {
-                sh "mvn clean package"
+                sh "mvn clean package -DpomFile=pom.xml"
             }
         }
 
@@ -25,7 +27,5 @@ pipeline{
                 sh "mvn test"
             }
         }
-
-
     }
 }
