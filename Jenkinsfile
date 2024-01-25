@@ -14,10 +14,18 @@ pipeline{
             }
         }
 
-        stage("Checkout from SCM") {
+        stage("Build Application") {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/zlishanka/devops-sample-app-pipeline'
+                sh "mvn clean package"
             }
         }
+
+        stage("Test Application") {
+            steps {
+                sh "mvn test"
+            }
+        }
+
+
     }
 }
